@@ -1,34 +1,20 @@
-# directory containing source data
-SRCDIR := data
+# Minimal makefile for Sphinx documentation
+#
 
-# directory containing intermediate data
-TMPDIR := processed_data
+# You can set these variables from the command line, and also
+# from the environment for the first two.
+SPHINXOPTS    ?=
+SPHINXBUILD   ?= sphinx-build
+SOURCEDIR     = source
+BUILDDIR      = build
 
-# results directory
-RESDIR := results
+# Put it first so that "make" without argument is like "make help".
+help:
+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-# all source files (book texts)
-SRCS = $(wildcard $(SRCDIR)/*.txt)
+.PHONY: help Makefile
 
-# all intermediate data files
-DATA = $(patsubst $(SRCDIR)/%.txt,$(TMPDIR)/%.dat,$(SRCS))
-
-# all images
-IMAGES = $(patsubst $(SRCDIR)/%.txt,$(RESDIR)/%.png,$(SRCS))
-
-all: $(DATA) $(IMAGES) $(RESDIR)/results.txt
-
-$(TMPDIR)/%.dat: $(SRCDIR)/%.txt source/wordcount.py
-	python source/wordcount.py $< $@
-
-$(RESDIR)/%.png: $(TMPDIR)/%.dat source/plotcount.py
-	python source/plotcount.py $< $@
-
-$(RESDIR)/results.txt: $(DATA) source/zipf_test.py
-	python source/zipf_test.py $(DATA) > $@
-
-clean:
-	@$(RM) $(TMPDIR)/*
-	@$(RM) $(RESDIR)/*
-
-.PHONY: clean directories
+# Catch-all target: route all unknown targets to Sphinx using the new
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+%: Makefile
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
