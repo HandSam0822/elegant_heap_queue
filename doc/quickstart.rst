@@ -1,7 +1,7 @@
 Quickstart
 ==========
 
-The Elegant Priority Queue package contains resourceful API for Python developer better using Priority Queue to achieve their goal.
+The Elegant Heap Queue package contains resourceful API for Python developer better using Priority Queue to achieve their goal.
 Considering that there're lots of inconvenience when using existing Python PQ library such as `heapq`_ and `queue.PriorityQueue`_
 
 
@@ -9,8 +9,7 @@ Considering that there're lots of inconvenience when using existing Python PQ li
 
 .. _queue.PriorityQueue: https://docs.python.org/3/library/queue.html
 
-Thee detailed documentation can be found in :doc:`apidocs`.
-
+Thee detailed can be found in :doc:`apidocs`.
 
 
 Usage
@@ -18,15 +17,15 @@ Usage
 
 ::
 
-    pip install PriorityQueue
+    pip install elegant-heap-queue
 
 It's also possible to use the library files uploaded to the `PyPI`_  website directly in your projects.
 
-.. _PyPI: https://pypi.org/
+.. _PyPI: https://pypi.org/project/elegant-heap-queue/
 
 
 
-Getting Started with Elegant Priority Queue
+Getting Started with Elegant Heap Queue
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Constructor Arguments
