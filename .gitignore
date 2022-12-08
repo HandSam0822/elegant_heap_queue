@@ -5,3 +5,5 @@ venv/
 results/*.png
 results/*.txt
 processed_data/*.dat
+_build
+.DS_Store
