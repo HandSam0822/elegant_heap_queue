@@ -60,6 +60,10 @@ class HeapQueue(Generic[T]):
         HeapQueue invariants. Similar, if a ``key`` function is used, but items passed to the HeapQueue are not of the key function data type,
         it is undefined behavior.
 
+        Note on object ownership: items passed with the items parameter are owned by the HeapQueue object and should not be mutated by external sources.
+
+        This class is NOT synchronized and should not be used in multiprocessing or multithreading contexts without proper synchronization.
+
         Time Complexity: O(n log n) --> worst case when ``items`` iterable passed.
         
         Parameters
@@ -75,7 +79,7 @@ class HeapQueue(Generic[T]):
         Raises
         ------
         TypeError
-            If key function is not provided and HeapQueue type is not sortable.
+            If key function is not provided and HeapQueue item type is not sortable.
 
         Examples
         --------
@@ -119,7 +123,7 @@ class HeapQueue(Generic[T]):
             for item in items:
                 if not self.__is_sortable(item):
                     raise TypeError(
-                        "Cannot provide non-sortable value type if a key function is not given")
+                        "Cannot provide incomparable value type if a key function is not given")
 
         self._key_function = key
         self.heap_type = heap_type
@@ -180,6 +184,8 @@ class HeapQueue(Generic[T]):
         as the items in the HeapQueue, otherwise it is undefined behavior and there are no guarantees
         on the HeapQueue invariants.
 
+        Note on object ownership: items passed with the item parameter are owned by the HeapQueue object and should not be mutated by external sources.
+
         Time Complexity: O(log n)
 
         Parameters
@@ -207,14 +213,16 @@ class HeapQueue(Generic[T]):
         """
         if self._key_function is None and not self.__is_sortable(item):
             raise TypeError(
-                "Cannot provide non-int value type if a key function is not given")
+                "Cannot provide incomparable value type if a key function is not given")
 
         heapq.heappush(self._heap, self.__prepare_value(item))
 
     def pop(self):
         """
         Removes and returns the top item in the HeapQueue; ie. the item with the highest current
-        priority. 
+        priority.
+
+        Note on object ownership: once an item has been popped from the HeapQueue, the HeapQueue surrenders ownership of the item object to the caller.
         
         Time Complexity: O(log n)
 
@@ -251,6 +259,8 @@ class HeapQueue(Generic[T]):
         HeapQueue will be determined by their "priority" in comparison to the existing items in the HeapQueue. ``Items`` 
         iterable MUST be all the same data type and the same type as the items in the HeapQueue, otherwise it is undefined 
         behavior and there are no guarantees on the HeapQueue invariants.
+
+        Note on object ownership: items passed with the items parameter are owned by the HeapQueue object and should not be mutated by external sources.
         
         Time Complexity: O(k log n), where k is the size of ``items``
         
@@ -282,12 +292,14 @@ class HeapQueue(Generic[T]):
         for item in items:
             if self._key_function is None and not self.__is_sortable(item):
                 raise TypeError(
-                    "Cannot provide non-int value type if a key function is not given")
+                    "Cannot provide incomparable value type if a key function is not given")
             heapq.heappush(self._heap, self.__prepare_value(item))
 
     def pop_k(self, k: int) -> list[T]:
         """
         Removes and returns the top ``k`` items from the HeapQueue.
+
+        Note on object ownership: once the items have been popped from the HeapQueue, the HeapQueue surrenders ownership of the item objects to the caller.
 
         Time Complexity : O(k log n)
         
@@ -337,6 +349,9 @@ class HeapQueue(Generic[T]):
     def as_sorted_list(self):
         """
         Returns all items in the HeapQueue as a sorted list based on priority.
+
+        Note on object ownership: while the returned list itself is owned by the caller, the items within the list may still
+        be owned by the HeapQueue until they have been popped from the HeapQueue.
 
         Time Complexity : O(n log n)
         
