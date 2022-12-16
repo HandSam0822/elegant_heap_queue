@@ -33,6 +33,7 @@ extensions = [ 'sphinx.ext.autodoc',
                'sphinx.ext.intersphinx',
             #    'sphinx_design',
               ]
+autoclass_content = 'both'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -57,4 +58,4 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # Set up intersphinx maps
 intersphinx_mapping = {'numpy': ('https://numpy.org/doc/stable', None)}
-autoclass_content = "both"
+
