@@ -57,3 +57,4 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # Set up intersphinx maps
 intersphinx_mapping = {'numpy': ('https://numpy.org/doc/stable', None)}
+autoclass_content = "both"
