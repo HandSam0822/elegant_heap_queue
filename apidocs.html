@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Documentation &#8212; HeapQueue  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-heap_queue">
+<span id="documentation"></span><h1>Documentation<a class="headerlink" href="#module-heap_queue" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="heap_queue.HeapQueue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">heap_queue.</span></span><span class="sig-name descname"><span class="pre">HeapQueue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heap_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#heap_queue.HeapType" title="heap_queue.HeapType"><span class="pre">HeapType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">HeapType.MIN_HEAP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComparableT</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#heap_queue.HeapQueue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a HeapQueue which is an implementation of a priority queue data structure where every element has some “priority” associated with it. 
+The priority of the elements in a queue combined with its ordering (<code class="docutils literal notranslate"><span class="pre">HeapType</span></code>) determine the order in which elements are served.
+If <code class="docutils literal notranslate"><span class="pre">items</span></code> iterable argument is passed it MUST be all the same data type, otherwise it is undefined behavior and there are no guarantees on the 
+HeapQueue invariants. Similar, if a <code class="docutils literal notranslate"><span class="pre">key</span></code> function is used, but items passed to the HeapQueue are not of the key function data type,
+it is undefined behavior.</p>
+<p>Note on object ownership: items passed with the items parameter are owned by the HeapQueue object and should not be mutated by external sources.</p>
+<p>This class is NOT synchronized and should not be used in multiprocessing or multithreading contexts without proper synchronization.</p>
+<p>Time Complexity: O(n log n) –&gt; worst case when <code class="docutils literal notranslate"><span class="pre">items</span></code> iterable passed.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>items<span class="classifier">Optional[Iterable[T]]</span></dt><dd><p>Iterable of initial items to push to the HeapQueue.</p>
+</dd>
+<dt>heap_type<span class="classifier">HeapType</span></dt><dd><p>Defines the ordering of the items within the HeapQueue. Default value MIN_HEAP.</p>
+</dd>
+<dt>key<span class="classifier">Optional[Callable[[T], ComparableT]]</span></dt><dd><p>Key function to define the value which an item’s “priority” should be generated from. Generally,
+used when the HeapQueue’s type is a custom class.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h2>Raises<a class="headerlink" href="#raises" title="Permalink to this heading">¶</a></h2>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If key function is not provided and HeapQueue item type is not sortable.</p>
+</dd>
+</dl>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">()</span> <span class="c1"># creates an empty min HeapQueue</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MAX_HEAP</span><span class="p">)</span> <span class="c1"># creates an empty max HeapQueue</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span> <span class="c1"># creates a min HeapQueue with initial values</span>
+<span class="go">    [&quot;Alex&quot;, &quot;Tyler&quot;, &quot;Shou-San&quot;, &quot;David&quot;]</span>
+<span class="go">) </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
+<span class="go">&quot;Alex&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span> <span class="c1"># creates a max HeapQueue with initial values</span>
+<span class="go">    [&quot;Alex&quot;, &quot;Tyler&quot;, &quot;Shou-San&quot;, &quot;David&quot;],</span>
+<span class="go">    heap_type=HeapType.MAX_HEAP</span>
+<span class="go">) </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
+<span class="go">&quot;Tyler&quot;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">ServerNode</span><span class="p">:</span>
+<span class="go">    def __init__(self, id):</span>
+<span class="go">        self.id = id</span>
+<span class="go">    def calculate_utilization():</span>
+<span class="go">        # some custom logic</span>
+<span class="go">        return res</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span> <span class="c1"># creates a min HeapQueue with a custom class</span>
+<span class="go">    [ServerNode(x) for x in range(10)],</span>
+<span class="go">    key=lambda sn: sn.calculate_utilization() </span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
+<span class="go">lowest utilization node</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span> <span class="c1"># creates a max HeapQueue with a custom class</span>
+<span class="go">    [ServerNode(x) for x in range(10)],</span>
+<span class="go">    heap_type=HeapType=MAX_HEAP,</span>
+<span class="go">    key=lambda sn: sn.calculate_utilization() </span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
+<span class="go">highest utilization node</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="heap_queue.HeapQueue.as_sorted_list">
+<span class="sig-name descname"><span class="pre">as_sorted_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#heap_queue.HeapQueue.as_sorted_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all items in the HeapQueue as a sorted list based on priority.</p>
+<p>Note on object ownership: while the returned list itself is owned by the caller, the items within the list may still
+be owned by the HeapQueue until they have been popped from the HeapQueue.</p>
+<p>Time Complexity : O(n log n)</p>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>list[T]</dt><dd><p>A list of all the items in the HeapQueue sorted by priority.</p>
+</dd>
+</dl>
+</section>
+<section id="id1">
+<h3>Examples<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MAX_HEAP</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">maxHeap</span><span class="o">.</span><span class="n">as_sorted_list</span><span class="p">():</span>
+<span class="go">    # do useful work with the sorted values</span>
+<span class="go">    print(item)</span>
+<span class="go"># prints: 5, 4, 3, 2, 1, 0</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="heap_queue.HeapQueue.peek">
+<span class="sig-name descname"><span class="pre">peek</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#heap_queue.HeapQueue.peek" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns (but does not remove) the top item in the HeapQueue; ie. the item with the
+current highest priority.</p>
+<p>Time Complexity: O(1)</p>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>T</dt><dd><p>The item with the highest priority currently at the top of the HeapQueue.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Examples<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span> <span class="c1"># 0 still on top of HeapQueue</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span> <span class="c1"># 4 still on top of HeapQueue</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="heap_queue.HeapQueue.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#heap_queue.HeapQueue.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes and returns the top item in the HeapQueue; ie. the item with the highest current
+priority.</p>
+<p>Note on object ownership: once an item has been popped from the HeapQueue, the HeapQueue surrenders ownership of the item object to the caller.</p>
+<p>Time Complexity: O(log n)</p>
+<section id="id4">
+<h3>Returns<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>T</dt><dd><p>The item with the highest priority removed from the top of the HeapQueue.</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h3>Raises<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>IndexError</dt><dd><p>Raised when calling pop from an empty HeapQueue</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Examples<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">HeapQueue</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MAX_HEAP</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># 3 is no longer in the HeapQueue</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">maxHeap</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="go">IndexError(&quot;pop() from empty HeapQueue&quot;)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="heap_queue.HeapQueue.pop_k">
+<span class="sig-name descname"><span class="pre">pop_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#heap_queue.HeapQueue.pop_k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes and returns the top <code class="docutils literal notranslate"><span class="pre">k</span></code> items from the HeapQueue.</p>
+<p>Note on object ownership: once the items have been popped from the HeapQueue, the HeapQueue surrenders ownership of the item objects to the caller.</p>
+<p>Time Complexity : O(k log n)</p>
+<section id="id7">
+<h3>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>k<span class="classifier">int</span></dt><dd><p>The number of items to pop</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>list[T]</dt><dd><p>A list of len() == k which has the ‘k’ of the highest priority items removed from 
+the HeapQueue. The items in the list are sorted in descending order of priority.</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h3>Raises<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If attempted to pop a negative number of elements (k &lt;= 0)</p>
+</dd>
+<dt>IndexError</dt><dd><p>If attempted to pop <code class="docutils literal notranslate"><span class="pre">k</span></code> that is larger than size of HeapQueue (k &lt; len(HeapQueue))
+if k is greater than the size of the heap”</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>Examples<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MAX_HEAP</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">pop_k</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">ValueError(&quot;Cannot pop a non-positive number of items&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">pop_k</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">IndexError(&quot;Cannot pop k items if k is greater than the size of the heap&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">pop_k</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[5, 4, 3]</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="heap_queue.HeapQueue.push">
+<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#heap_queue.HeapQueue.push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pushes the <code class="docutils literal notranslate"><span class="pre">item</span></code> onto the HeapQueue. Its location in the HeapQueue will be determined by
+its “priority” in comparison to the existing items in the HeapQueue. <code class="docutils literal notranslate"><span class="pre">Item</span></code> MUST be the same data type
+as the items in the HeapQueue, otherwise it is undefined behavior and there are no guarantees
+on the HeapQueue invariants.</p>
+<p>Note on object ownership: items passed with the item parameter are owned by the HeapQueue object and should not be mutated by external sources.</p>
+<p>Time Complexity: O(log n)</p>
+<section id="id11">
+<h3>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>item<span class="classifier">T</span></dt><dd><p>The item to push onto the HeapQueue</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h3>Returns<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h3>
+<p>None</p>
+</section>
+<section id="id13">
+<h3>Raises<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>Raised when the <code class="docutils literal notranslate"><span class="pre">item</span></code> is not sortable and there is no key function for the HeapQueue</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h3>Examples<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">HeapQueue</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MAX_HEAP</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>     <span class="n">maxHeap</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 4 at the top of HeapQueue now</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="heap_queue.HeapQueue.push_all">
+<span class="sig-name descname"><span class="pre">push_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#heap_queue.HeapQueue.push_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over the inputted <code class="docutils literal notranslate"><span class="pre">items</span></code> iterable and pushes the items onto the heap. Items location in the 
+HeapQueue will be determined by their “priority” in comparison to the existing items in the HeapQueue. <code class="docutils literal notranslate"><span class="pre">Items</span></code> 
+iterable MUST be all the same data type and the same type as the items in the HeapQueue, otherwise it is undefined 
+behavior and there are no guarantees on the HeapQueue invariants.</p>
+<p>Note on object ownership: items passed with the items parameter are owned by the HeapQueue object and should not be mutated by external sources.</p>
+<p>Time Complexity: O(k log n), where k is the size of <code class="docutils literal notranslate"><span class="pre">items</span></code></p>
+<section id="id15">
+<h3>Parameters<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>items<span class="classifier">Iterable[T]</span></dt><dd><p>An iterator of items to push onto the heap</p>
+</dd>
+</dl>
+</section>
+<section id="id16">
+<h3>Returns<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h3>
+<p>None</p>
+</section>
+<section id="id17">
+<h3>Raises<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h3>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>Raised when an item in <code class="docutils literal notranslate"><span class="pre">items</span></code> is not sortable and there is no key function for the HeapQueue</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h3>Examples<a class="headerlink" href="#id18" title="Permalink to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">HeapQueue</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MAX_HEAP</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="heap_queue.HeapType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">heap_queue.</span></span><span class="sig-name descname"><span class="pre">HeapType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#heap_queue.HeapType" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HeapType enum defines the ordering of items within the HeapQueue. Specifically, it uses
+the HeapQueue key function (if provided during construction) or Python default comparison to 
+generate an item’s “priority” which it uses to arrange the items in the HeapQueue.</p>
+<section id="enumerations">
+<h2>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>MIN_HEAP: </dt><dd><p>The item with the minimal priority will always be at the top of the HeapQueue.</p>
+</dd>
+<dt>MAX_HEAP: </dt><dd><p>The item with the maximum priority will always be at the top of the HeapQueue.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id19">
+<h2>Examples<a class="headerlink" href="#id19" title="Permalink to this heading">¶</a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MAX_HEAP</span><span class="p">)</span> <span class="c1"># will use Python default comparison for items passed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MIN_HEAP</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">DataNode</span><span class="p">:</span>
+<span class="go">    def __init__(self, val, next=None):</span>
+<span class="go">        self.val = val</span>
+<span class="go">        self.next = next</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span> <span class="o">=</span> <span class="n">HeapQueue</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">heap_type</span><span class="o">=</span><span class="n">HeapType</span><span class="o">.</span><span class="n">MAX_HEAP</span><span class="p">)</span> <span class="c1"># will use key function for items passed (DataNode instances)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">push_all</span><span class="p">([</span><span class="n">DataNode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxHeap</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span><span class="o">.</span><span class="n">val</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">HeapQueue</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#heap_queue.HeapQueue"><code class="docutils literal notranslate"><span class="pre">HeapQueue</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#heap_queue.HeapType"><code class="docutils literal notranslate"><span class="pre">HeapType</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="quickstart.html" title="previous chapter">Quickstart</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, ....
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/apidocs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
